@@ -38,3 +38,14 @@ print(f"Número de vinhos com qualidade maior que 6: {n_acima_6}")
 print(f"Número de vinhos com qualidade menor que 5: {n_abaixo_5}")
 print(f"Número de vinhos com qualidade entre 5 e 6: {n_entre_5}")
 print(f"Porcentagem de vinhos com qualidade maior que 6: {acima_6_porcentagem:.2f}")
+
+# Cria um histograma com a distribuição de vinhos em cada qualidade
+plt.figure(figsize=(8, 5))
+sns.histplot(data=data, x="quality", discrete=True, color="teal")
+plt.title("Distribuiçao dos vinhos em cada qualidade")
+plt.xlabel("Qualidade")
+plt.ylabel("Número total")
+plt.show()
+
+# Mais informações úteis
+print(np.round(data.describe()))
