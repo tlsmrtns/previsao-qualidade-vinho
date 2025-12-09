@@ -49,3 +49,7 @@ plt.show()
 
 # Mais informações úteis
 print(np.round(data.describe()))
+
+# Gerar um gráfico de dispersão para procurar correlações
+pd.plotting.scatter_matrix(data, alpha=0.3, figsize=(15,15), diagonal="kde")
+plt.show()
