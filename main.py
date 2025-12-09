@@ -51,5 +51,11 @@ plt.show()
 print(np.round(data.describe()))
 
 # Gerar um gráfico de dispersão para procurar correlações
-pd.plotting.scatter_matrix(data, alpha=0.3, figsize=(15,15), diagonal="kde")
+pd.plotting.scatter_matrix(data, alpha=0.3, figsize=(40,40), diagonal="kde")
+plt.show()
+
+correlation = data.corr()
+print(correlation)
+plt.figure(figsize=(14,12))
+heatmap = sns.heatmap(correlation, annot=True, linewidths=0, vmin=-1, cmap="RdBu_r")
 plt.show()
