@@ -98,6 +98,9 @@ plt.gcf().clear()
 # Para cada característica, encontrar os pontos de dados com valores extremos altos ou baixos
 outliers = []
 for caracteristica in data.keys():
+    if caracteristica == 'quality':
+        continue
+    
     # Calcular Q1 (25º percentil dos dados) para a característica dada
     Q1 = np.percentile(data[caracteristica], q=25)
 
