@@ -1,3 +1,26 @@
+# 1. Ambientes Virtuais (Nunca envie isso!)
 venv/
+env/
+.venv/
+
+# 2. Arquivos compilados/temporários do Python (Lixo)
 __pycache__/
+*.py[cod]
+*$py.class
+
+# 3. Configurações do VS Code e Editores (Pessoal seu)
 .vscode/
+.idea/
+
+# 4. Arquivos de Variáveis de Ambiente (ONDE MORAM AS SENHAS)
+# Se no futuro você usar chaves de API, coloque dentro de um arquivo .env
+.env
+
+# 5. Bancos de dados locais (se usar sqlite)
+*.sqlite3
+*.db
+
+# 6. Arquivos grandes (Opcional)
+# Se os arquivos .pkl forem maiores que 100MB, o GitHub bloqueia.
+# Se forem pequenos, pode deixar comentado (#) para eles subirem.
+# *.pkl
