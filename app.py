@@ -2,12 +2,21 @@ import joblib
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 # Inicializar API
 app = FastAPI(
     title="API de Qualidade de Vinho",
     description="Uma API simples para prever se um vinho é bom ou ruim baseada em ML.",
     version="1.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permite que qualquer site acesse (para desenvolvimento local é ok)
+    allow_credentials=True,
+    allow_methods=["*"],  # Permite todos os métodos (GET, POST, etc)
+    allow_headers=["*"],
 )
 
 # Carregar os arquivos .pkl
