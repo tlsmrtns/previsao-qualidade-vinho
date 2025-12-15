@@ -59,3 +59,37 @@ print(correlation)
 plt.figure(figsize=(14,12))
 heatmap = sns.heatmap(correlation, annot=True, linewidths=0, vmin=-1, cmap="RdBu_r")
 plt.show()
+
+# Visualizar a correlação entre ph e fixed acidity
+fixedAcidity_pH = data[['pH', 'fixed acidity']]
+gridA = sns.JointGrid(x="fixed acidity", y="pH", data=fixedAcidity_pH, height=6)
+gridA = gridA.plot_joint(sns.regplot, scatter_kws={"s": 10})
+gridA = gridA.plot_marginals(sns.distplot)
+plt.show()
+
+# Visualizar a correlação entre citric acid e fixed acidity
+fixedAcidity_citricAcid = data[['citric acid', 'fixed acidity']]
+g = sns.JointGrid(x="fixed acidity", y="citric acid", data=fixedAcidity_citricAcid, height=6)
+g = g.plot_joint(sns.regplot, scatter_kws={"s": 10})
+g = g.plot_marginals(sns.distplot)
+plt.show()
+
+# Visualizar a correlação entre volatile acidity e qualidade (para valores discretos, melhor usar um gráfico de barras)
+volatileAcidity_quality = data[['volatile acidity', 'quality']]
+fig, axs = plt.subplots(ncols=1,figsize=(10,6))
+sns.barplot(x='quality', y='volatile acidity', data=volatileAcidity_quality, ax=axs)
+plt.title('quality VS volatile acidity')
+
+plt.tight_layout()
+plt.show()
+plt.gcf().clear()
+
+# Alcohol vs quality
+quality_alcohol = data[['alcohol', 'quality']]
+fig, axs = plt.subplots(ncols=1,figsize=(10,6))
+sns.barplot(x='quality', y='alcohol', data=quality_alcohol, ax=axs)
+plt.title('quality VS alcohol')
+
+plt.tight_layout()
+plt.show()
+plt.gcf().clear()
