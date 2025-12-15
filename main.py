@@ -129,3 +129,28 @@ outliers = list(set(outliers))
 dados_limpos = data.drop(data.index[outliers]).reset_index(drop=True)
 print(f"\nTotal de outliers removidos: {len(outliers)}")
 print(f"Dados restantes: {dados_limpos.shape[0]} linhas")
+
+# Preparação dos dados
+y = dados_limpos['quality'].apply(lambda x: 1 if x > 6 else 0)
+X = dados_limpos.drop('quality', axis=1)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Padronização dos dados
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Treinar modelo Random Forest
+modelo = RandomForestClassifier(n_estimators=100, random_state=42)
+modelo.fit(X_train_scaled, y_train)
+
+# Avaliação do modelo
+previsoes = modelo.predict(X_test_scaled)
+acuracia = accuracy_score(y_test, previsoes)
+print(f"Acurácia: {acuracia:.2%}")
+print(classification_report(y_test, previsoes))
+
+# Salvar artefatos
+joblib.dump(modelo, 'modelo_vinho.pkl')
+joblib.dump(scaler, 'scaler_vinho.pkl')
