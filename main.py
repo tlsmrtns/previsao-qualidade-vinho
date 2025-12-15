@@ -93,3 +93,31 @@ plt.title('quality VS alcohol')
 plt.tight_layout()
 plt.show()
 plt.gcf().clear()
+
+# Método de Tukey
+# Para cada característica, encontrar os pontos de dados com valores extremos altos ou baixos
+outliers = []
+for caracteristica in data.keys():
+    # Calcular Q1 (25º percentil dos dados) para a característica dada
+    Q1 = np.percentile(data[caracteristica], q=25)
+
+    # Calcular Q3 (75º percentil dos dados) para a característica dada
+    Q3 = np.percentile(data[caracteristica], q=75)
+
+    # Usar o intervalo interquartil para calcular um passo de outlier (1.5 vezes o intervalo interquartil)
+    intervalo_interquartil = Q3 - Q1
+    passo = 1.5 * intervalo_interquartil
+
+    # Exibir os outliers
+    print("Pontos de dados considerados outliers para a característica '{}':".format(caracteristica))
+    outliers_caracteristica = data[~((data[caracteristica] >= Q1 - passo) & (data[caracteristica] <= Q3 + passo))]
+    print(outliers_caracteristica)
+
+    # Armazenar os índices dos outliers detectados
+    outliers.extend(outliers_caracteristica.index.tolist())
+
+# Remover duplicatas e os outliers
+outliers = list(set(outliers))
+dados_limpos = data.drop(data.index[outliers]).reset_index(drop=True)
+print(f"\nTotal de outliers removidos: {len(outliers)}")
+print(f"Dados restantes: {dados_limpos.shape[0]} linhas")
